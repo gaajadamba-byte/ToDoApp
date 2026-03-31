@@ -1,35 +1,45 @@
 "use client";
 
 const TodoList = ({ todos, toggleTodo, deleteTodo }) => {
+  if (todos.length === 0) {
+    return (
+      <p className="text-center text-gray-400 mt-4">
+        No tasks yet. Add one above!
+      </p>
+    );
+  }
+
   return (
-    <ul className="w-full flex flex-col gap-2">
+    <ul className="flex flex-col gap-2">
       {todos.map((todo) => (
         <li
           key={todo.id}
-          className="flex items-center justify-between border border-gray-200 rounded-2xl p-2"
+          className="flex items-center justify-between bg-gray-100 p-3 rounded-lg"
         >
-          <div className="flex items-center gap-2">
+          <div className="flex items-center gap-3">
             <input
               type="checkbox"
               checked={todo.completed}
               onChange={() => toggleTodo(todo.id)}
-              className="h-5 w-5 text-blue-600"
+              className="h-5 w-5"
             />
             <span
               className={`${
-                todo.completed ? "line-through text-gray-500" : "text-gray-800"
+                todo.completed ? "line-through text-gray-400" : "text-gray-800"
               }`}
             >
               {todo.text}
             </span>
           </div>
 
-          <button
-            onClick={() => deleteTodo(todo.id)}
-            className="px-2 py-1 rounded-lg bg-red-500 text-white hover:bg-red-600"
-          >
-            Delete
-          </button>
+          {todo.completed && (
+            <button
+              onClick={() => deleteTodo(todo.id)}
+              className="px-3 py-1 text-sm rounded-lg bg-red-100 text-red-500"
+            >
+              Delete
+            </button>
+          )}
         </li>
       ))}
     </ul>

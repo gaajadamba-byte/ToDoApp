@@ -12,17 +12,16 @@ const Input = ({ addTodo }) => {
   };
 
   return (
-    <div className="flex w-full gap-2">
+    <div className="flex gap-2">
       <input
         value={input}
         onChange={(e) => setInput(e.target.value)}
-        type="text"
-        placeholder="Add a new task ..."
-        className="flex-1 h-[40px] px-4 border rounded-[6px]"
+        placeholder="Add a new task..."
+        className="flex-1 h-[44px] px-4 border rounded-lg outline-none focus:ring-2 focus:ring-blue-400"
       />
       <button
         onClick={handleAdd}
-        className="h-[40px] px-4 rounded-[6px] bg-[#3C82F6] text-white hover:bg-blue-600"
+        className="px-4 rounded-lg bg-blue-500 text-white hover:bg-blue-600"
       >
         Add
       </button>

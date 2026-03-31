@@ -4,6 +4,7 @@ import { useState } from "react";
 import Input from "../components/Input";
 import Filters from "../components/Filters";
 import TodoList from "../components/TodoList";
+import TodoFooter from "../components/TodoFooter";
 
 const Page = () => {
   const [todos, setTodos] = useState([]);
@@ -23,6 +24,10 @@ const Page = () => {
     setTodos(todos.filter((t) => t.id !== id));
   };
 
+  const clearCompleted = () => {
+    setTodos(todos.filter((t) => !t.completed));
+  };
+
   const filteredTodos = todos.filter((t) => {
     if (filter === "active") return !t.completed;
     if (filter === "completed") return t.completed;
@@ -30,11 +35,9 @@ const Page = () => {
   });
 
   return (
-    <div className="flex items-center justify-center pt-[50px] bg-blue-400 min-h-screen">
-      <div className="w-[477px] flex flex-col items-center bg-white p-6 gap-6 rounded-lg shadow-lg">
-        <h1 className="text-black font-['Inter'] text-3xl font-semibold tracking-[-0.5px]">
-          To Do List
-        </h1>
+    <div className="flex items-center justify-center min-h-screen bg-gray-100">
+      <div className="w-[420px] bg-white rounded-[8px] shadow-lg p-6 flex flex-col gap-5">
+        <h1 className="text-center text-2xl font-semibold">To-Do list</h1>
 
         <Input addTodo={addTodo} />
 
@@ -45,10 +48,12 @@ const Page = () => {
           toggleTodo={toggleTodo}
           deleteTodo={deleteTodo}
         />
-        <div className="flex gap-4">
-          <p>Powered by</p>
-          <p className="text-blue-600">Pinecone academy</p>
-        </div>
+
+        <TodoFooter todos={todos} clearCompleted={clearCompleted} />
+
+        <p className="text-center text-sm text-gray-400 ">
+          Powered by <span className="text-blue-500"> Pinecone academy</span>
+        </p>
       </div>
     </div>
   );
