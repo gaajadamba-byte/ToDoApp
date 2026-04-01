@@ -21,7 +21,11 @@ const Page = () => {
   };
 
   const deleteTodo = (id) => {
-    setTodos(todos.filter((t) => t.id !== id));
+    if (window.confirm("are you sure ? ") === true) {
+      setTodos(todos.filter((t) => t.id !== id));
+    } else {
+      return;
+    }
   };
 
   const clearCompleted = () => {
